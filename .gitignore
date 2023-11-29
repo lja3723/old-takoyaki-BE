@@ -5,8 +5,16 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-###개인 파일###
+### 개인 파일 ###
 toDo.txt
+
+### 실험용 정적 파일 ###
+static/
+templates/
+
+
+### 설정 파일 ###
+application-oauth2-local.yml
 
 ### STS ###
 .apt_generated
