@@ -12,9 +12,7 @@ toDo.txt
 static/
 templates/
 
-
 ### 설정 파일 ###
-application-oauth2-local.yml
 
 ### STS ###
 .apt_generated
