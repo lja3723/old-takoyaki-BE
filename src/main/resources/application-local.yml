@@ -1,14 +1,18 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
+    url: jdbc:mysql://localhost:3306/takoyaki?useSSL\=false&allowPublicKeyRetrieval\=true&characterEncoding\=UTF-8&serverTimezone\=UTC
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
-    driver-class-name: ${DATABASE_DRIVER}
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
-    database-platform: ${DATABASE_ORM}
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
         format_sql: true
     hibernate:
       ddl-auto: create
+
+oauth2:
+  client_secret:
+    kakao: ${CLIENT_SECRET_KAKAO}
