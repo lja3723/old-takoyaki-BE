@@ -5,9 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CustomJson {
-
-    public static JsonNode stringToJsonNode(String jsonString) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public static ObjectMapper objectMapper = new ObjectMapper();
+    public static JsonNode convertJsonString2JsonNode(String jsonString) throws JsonProcessingException{
         return objectMapper.readTree(jsonString);
     }
 }
