@@ -17,7 +17,7 @@ public class OAuthKakaoWebClient implements OAuthWebClient{
     @Value("${oauth2.client_secret.kakao}")
     private String KAKAO_CLIENT_SECRET;
 
-    public String requestAccessToken(String code) {
+    public String requestTokens(String code) {
         WebClient webClient = WebClient.builder()
                 .baseUrl(OAuthKakaoConfig.URL1)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -28,6 +28,29 @@ public class OAuthKakaoWebClient implements OAuthWebClient{
                 .queryParam("client_id", OAuthKakaoConfig.CLIENT_ID)
                 .queryParam("redirect_uri", OAuthKakaoConfig.REDIRECT_URI)
                 .queryParam("code", code)
+                .queryParam("client_secret", KAKAO_CLIENT_SECRET)
+                .build(true)
+                .toString();
+        return webClient.post()
+                        .uri(uri)
+                        .retrieve()
+                        //잘 모르니 쓰지 말자.
+//                        .onStatus(HttpStatusCode::isError, clientResponse ->
+//                        Mono.error(new OAuthWebClientException("failed")))
+                        .bodyToMono(String.class)
+                        .block();
+    }
+
+    public String requestAccessToken(String refreshToken){
+        WebClient webClient = WebClient.builder()
+                .baseUrl(OAuthKakaoConfig.URL1)
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                .build();
+        String uri = UriComponentsBuilder.newInstance()
+                .path(OAuthKakaoConfig.ACCESS_TOKEN_URI)
+                .queryParam("grant_type", "refresh_token")
+                .queryParam("client_id", OAuthKakaoConfig.CLIENT_ID)
+                .queryParam("refresh_token", refreshToken)
                 .queryParam("client_secret", KAKAO_CLIENT_SECRET)
                 .build(true)
                 .toString();

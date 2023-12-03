@@ -1,6 +1,7 @@
 package com.bestbenefits.takoyaki.util.webclient.oauth;
 
 public interface OAuthWebClient {
-    String requestAccessToken(String code);
+    String requestTokens(String code);
+    String requestAccessToken(String refreshToken);
     String requestUserInfo(String accessToken);
 }
