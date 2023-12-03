@@ -9,10 +9,10 @@ public class ApiResponseCreator {
     public static <D> ApiResponse<D> success(D data, int status){
         return new ApiResponse<>(true, data, status);
     }
-    public static ApiResponse<String> fail(String message){
-        return new ApiResponse<>(false, message, HttpStatus.BAD_REQUEST.value());
+    public static ApiResponse<ApiMessage> fail(String message){
+        return new ApiResponse<>(false, new ApiMessage(message), HttpStatus.BAD_REQUEST.value());
     }
-    public static ApiResponse<String> fail(String message, int status){
-        return new ApiResponse<>(false, message, status);
+    public static ApiResponse<ApiMessage> fail(String message, int status){
+        return new ApiResponse<>(false, new ApiMessage(message), status);
     }
 }
