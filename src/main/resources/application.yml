@@ -12,7 +12,17 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: create
+  session:
+    jdbc:
+      table-name: "SPRING_SESSION"
+      initialize-schema: always
+      schema: classpath:org/springframework/session/jdbc/schema-mysql.sql
 
+server:
+  servlet:
+    session:
+      timeout: 180
 oauth2:
   client_secret:
     kakao: ${CLIENT_SECRET_KAKAO}
+
