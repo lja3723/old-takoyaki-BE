@@ -4,6 +4,7 @@ import com.bestbenefits.takoyaki.config.apiresponse.ApiResponse;
 import com.bestbenefits.takoyaki.config.apiresponse.ApiResponseCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -14,13 +15,11 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
-
-    //request body 못받았을 때
-//    @ExceptionHandler(HttpMessageNotReadableException.class)
-//    public ApiResponse<?> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
-//        return ApiResponseCreator.fail(e.getMessage());
-//    }
+    //body가 없는 경우
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ApiResponse<?> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
+        return ApiResponseCreator.fail("plz check request's body.");
+    }
 
     //@Vaild 검증 실패
     @ExceptionHandler(MethodArgumentNotValidException.class)
