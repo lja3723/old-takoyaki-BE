@@ -9,9 +9,9 @@ build/
 toDo.txt
 
 ### 실험용 파일 ###
-static/
-templates/
-UserNotRestController.java
+#static/
+#templates/
+#UserNotRestController.java
 
 ### 설정 파일 ###
 
