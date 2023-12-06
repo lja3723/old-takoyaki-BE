@@ -5,39 +5,40 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Getter
 @NoArgsConstructor
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String nickname;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "in_date")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date inDate;
+    @Column(nullable = false)
+    private int social;
 
-    @Column(name = "up_date")
+    @Column(name = "created_at")
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date upDate;
+    private LocalDateTime createdAt;
 
     @Builder
-    public User(String nickname, String password, String email){
-        this.nickname = nickname;
-        this.password = password;
+    public User(String email, int social){
         this.email = email;
+        this.social = social;
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public void updateNickname(String nickname){
+        this.nickname = nickname;
     }
 
 }

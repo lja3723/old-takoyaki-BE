@@ -1,7 +1,10 @@
 package com.bestbenefits.takoyaki.util.webclient.oauth;
 
+import com.bestbenefits.takoyaki.DTO.server.response.TokensResDTO;
+import com.bestbenefits.takoyaki.DTO.server.response.UserInfoResDTO;
+
 public interface OAuthWebClient {
-    String requestTokens(String code);
+    TokensResDTO requestTokens(String code);
     String requestAccessToken(String refreshToken);
-    String requestUserInfo(String accessToken);
+    UserInfoResDTO requestUserInfo(String accessToken);
 }
